@@ -20,6 +20,8 @@ with header:
     st.markdown(header_html, unsafe_allow_html=True,)
 
 with insertion:
+    fir, sec= st.columns(2)
+    fir.image("cat2.gif")
     st.header("LLena los campos:")
 
     sel_col,disp_col = st.columns(2)
@@ -29,21 +31,23 @@ with insertion:
 
     # day_1 = sel_col.slider("Día de salida: ", min_value=1,max_value=31,value=1,step=1)
     # mes_1 = sel_col.slider("Mes de salida: ", min_value=1,max_value=12,value=1,step=1)
-    fecha_1 = sel_col.date_input('start date')
-    fecha_2 = sel_col.date_input('end date')
+    
+    fecha_1 = sel_col.date_input('Dia de llegada')
+    fecha_2 = sel_col.date_input('Dia de salida')
 
     num_gatos= sel_col.slider("Número de gaticos: ", min_value=1,max_value=10,value=1,step=1)
 
     # ano,ano1=2021,2021
 
     rec = sel_col.selectbox("Recargo de Recogida: ", options=[0,5000,10000,15000,20000], index =0)
-
+    rec1 = sel_col.selectbox("Recargo de LLevada: ", options=[0,5000,10000,15000,20000], index =0)
     # date1 = date(int(ano), int(mes), int(day))
     # date2 = date(int(ano1), int(mes_1), int(day_1))
     date1 = fecha_1
     date2 = fecha_2
 
     recargo_recogida = int(rec)
+    recargo_llevada = int(rec1)
 
     ans = numOfDays(date1, date2)
 
@@ -51,7 +55,9 @@ with insertion:
     disp_col.write(ans)
 
     disp_col.subheader("Valor a cobrar en pesos: ")
-    disp_col.write(15000*ans*int(num_gatos) + recargo_recogida)
+    disp_col.write(15000*ans*int(num_gatos) + recargo_recogida + recargo_llevada)
 
     disp_col.subheader("Si se quedó hasta más de las 9:00 pm:")
-    disp_col.write((15000)*(ans+1)*int(num_gatos) + recargo_recogida)
+    disp_col.write((15000)*(ans+1)*int(num_gatos) + recargo_recogida + recargo_llevada)
+
+    disp_col.image("catgif.gif")
