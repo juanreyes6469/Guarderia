@@ -41,6 +41,9 @@ with insertion:
 
     rec = sel_col.selectbox("Recargo de Recogida: ", options=[0,5000,10000,15000,20000], index =0)
     rec1 = sel_col.selectbox("Recargo de LLevada: ", options=[0,5000,10000,15000,20000], index =0)
+
+    discount = sel_col.button("Tienes descuento?")
+
     # date1 = date(int(ano), int(mes), int(day))
     # date2 = date(int(ano1), int(mes_1), int(day_1))
     date1 = fecha_1
@@ -54,10 +57,16 @@ with insertion:
     disp_col.subheader("El gato se quedó esta cantidad de noches: ")
     disp_col.write(ans)
 
-    disp_col.subheader("Valor a cobrar en pesos: ")
-    disp_col.write(15000*ans*int(num_gatos) + recargo_recogida + recargo_llevada)
+    if discount:
+        disp_col.subheader("Valor a cobrar en pesos: ")
+        disp_col.write((15000*ans*int(num_gatos) + recargo_recogida + recargo_llevada)*0.95)
 
-    disp_col.subheader("Si se quedó hasta más de las 9:00 pm:")
-    disp_col.write((15000)*(ans+1)*int(num_gatos) + recargo_recogida + recargo_llevada)
+        disp_col.subheader("Si se quedó hasta más de las 9:00 pm:")
+        disp_col.write(((15000)*(ans+1)*int(num_gatos) + recargo_recogida + recargo_llevada)*0.95)
+    else:
+        disp_col.subheader("Valor a cobrar en pesos: ")
+        disp_col.write((15000*ans*int(num_gatos) + recargo_recogida + recargo_llevada))
 
+        disp_col.subheader("Si se quedó hasta más de las 9:00 pm:")
+        disp_col.write(((15000)*(ans+1)*int(num_gatos) + recargo_recogida + recargo_llevada))
     disp_col.image("catgif.gif")
